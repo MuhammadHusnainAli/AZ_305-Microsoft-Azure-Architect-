@@ -119,3 +119,120 @@
 
 **Q39.** Hot vs cold path?
 <details><summary>Answer</summary>Hot = real-time stream processing (Stream Analytics); cold = batch over stored historical data (Databricks/Synapse on the lake).</details>
+
+## More relational
+**Q40.** Which supports native `.bak` restore from on-prem: SQL Database or SQL MI?
+<details><summary>Answer</summary>**SQL Managed Instance** (RESTORE FROM URL).</details>
+
+**Q41.** Run one query across 20 sharded Azure SQL databases.
+<details><summary>Answer</summary>**Elastic query** (Elastic Database tools).</details>
+
+**Q42.** Schedule index maintenance across many Azure SQL databases (no SQL Agent).
+<details><summary>Answer</summary>**Elastic jobs** (or Azure Automation).</details>
+
+**Q43.** Reporting on a General Purpose SQL DB must not affect OLTP.
+<details><summary>Answer</summary>Readable **geo-replica**, or move to **Business Critical/Hyperscale** read replicas, or replicate to Synapse/Fabric.</details>
+
+**Q44.** When does an elastic pool save money?
+<details><summary>Answer</summary>When the sum of individual database peaks is much higher than the combined peak (databases peak at different times). You pay per pool.</details>
+
+**Q45.** Reduce cost of a 24×7 SQL database for 3 years.
+<details><summary>Answer</summary>**Reserved capacity (vCore)** + **Azure Hybrid Benefit**.</details>
+
+**Q46.** Recommended authentication for Azure SQL?
+<details><summary>Answer</summary>**Microsoft Entra-only authentication**: managed identities for apps, groups for admins.</details>
+
+**Q47.** Find and label columns with personal data.
+<details><summary>Answer</summary>**Data Discovery & Classification** (estate-wide: **Microsoft Purview**).</details>
+
+**Q48.** MySQL app needs reads in another region.
+<details><summary>Answer</summary>MySQL Flexible Server **cross-region read replica**.</details>
+
+**Q49.** Distributed PostgreSQL that scales out for multi-tenant SaaS.
+<details><summary>Answer</summary>**Azure Cosmos DB for PostgreSQL** (Citus) / PostgreSQL elastic clusters.</details>
+
+**Q50.** Which SQL tier supports In-Memory OLTP and the lowest-latency local storage?
+<details><summary>Answer</summary>**Business Critical.**</details>
+
+**Q51.** Hyperscale: how do you get a read-only replica in another region for reporting?
+<details><summary>Answer</summary>**Geo-replica** (or named replicas in the same region).</details>
+
+## More non-relational
+**Q52.** Cosmos DB hot partition: one tenant gets 80% of traffic.
+<details><summary>Answer</summary>Better partition key, **hierarchical/synthetic partition key** (tenantId + userId), or a dedicated container for big tenants.</details>
+
+**Q53.** Cosmos DB returns HTTP 429 under load.
+<details><summary>Answer</summary>Requests exceed **RU/s**: raise RU/s or use **autoscale**, optimise queries and indexing, retry with backoff.</details>
+
+**Q54.** Lower the RU cost of writes for documents with many properties.
+<details><summary>Answer</summary>Custom **indexing policy** that excludes unused paths.</details>
+
+**Q55.** Delete documents automatically after 30 days.
+<details><summary>Answer</summary>Cosmos DB **TTL**.</details>
+
+**Q56.** React to every insert or update in a Cosmos DB container.
+<details><summary>Answer</summary>**Change feed** (Azure Functions Cosmos DB trigger).</details>
+
+**Q57.** Restore a Cosmos DB container to its state 2 hours ago.
+<details><summary>Answer</summary>**Continuous backup** with **point-in-time restore**.</details>
+
+**Q58.** Social network friends-of-friends queries.
+<details><summary>Answer</summary>**Cosmos DB for Apache Gremlin** (graph).</details>
+
+**Q59.** Cheap hosting for a static website.
+<details><summary>Answer</summary>Blob **static website** or **Azure Static Web Apps**, plus Front Door/CDN.</details>
+
+**Q60.** Asynchronously copy selected containers to an account in another region.
+<details><summary>Answer</summary>**Object replication.**</details>
+
+**Q61.** Scan uploaded blobs for malware.
+<details><summary>Answer</summary>**Defender for Storage** malware scanning.</details>
+
+**Q62.** VM disks, temp disk and caches must be encrypted with your own key.
+<details><summary>Answer</summary>**Encryption at host** + **customer-managed keys** (Disk Encryption Set).</details>
+
+**Q63.** Disks need short bursts of extra performance at boot time.
+<details><summary>Answer</summary>Premium SSD **disk bursting**.</details>
+
+**Q64.** An archived blob is needed urgently.
+<details><summary>Answer</summary>Rehydrate with **High priority** (often under 1 hour for small blobs).</details>
+
+**Q65.** Several branch offices need fast local access to the same share.
+<details><summary>Answer</summary>**Azure File Sync** with a server endpoint at each branch.</details>
+
+**Q66.** A storage account is hitting its request-rate limit.
+<details><summary>Answer</summary>Spread data across **multiple accounts**, use **premium** accounts, cache with CDN.</details>
+
+**Q67.** Which redundancy options support customer-initiated account failover?
+<details><summary>Answer</summary>**GRS, RA-GRS, GZRS, RA-GZRS.**</details>
+
+**Q68.** Data must never leave the country, but must survive a zone outage.
+<details><summary>Answer</summary>**ZRS** (GRS may replicate to a paired region; check the pair's location).</details>
+
+## More data integration
+**Q69.** ADF should copy only rows changed since the last run.
+<details><summary>Answer</summary>**Incremental load** with a watermark column, or **change data capture**.</details>
+
+**Q70.** ADF must reach a data source in a private Azure VNet without your own VMs.
+<details><summary>Answer</summary>**Managed VNet integration runtime** with **managed private endpoints**.</details>
+
+**Q71.** Where does ADF keep connection secrets?
+<details><summary>Answer</summary>**Key Vault linked service** accessed with ADF's managed identity.</details>
+
+**Q72.** How should you organise data in a lake?
+<details><summary>Answer</summary>**Medallion**: bronze (raw) → silver (cleaned) → gold (business-ready), stored as **Delta/Parquet**.</details>
+
+**Q73.** Catalogue, classify and see the lineage of data across Azure and on-prem.
+<details><summary>Answer</summary>**Microsoft Purview.**</details>
+
+**Q74.** Count events in 10-minute windows produced every 5 minutes (overlapping).
+<details><summary>Answer</summary>Stream Analytics **hopping window** (size 10, hop 5).</details>
+
+**Q75.** Group clicks into sessions separated by 30 minutes of inactivity.
+<details><summary>Answer</summary>**Session window.**</details>
+
+**Q76.** One SaaS platform for ingestion, lakehouse, warehouse, real-time and Power BI.
+<details><summary>Answer</summary>**Microsoft Fabric** (OneLake).</details>
+
+**Q77.** Join a real-time stream with a slowly changing product list.
+<details><summary>Answer</summary>Stream Analytics **reference data** input (Blob/SQL).</details>

@@ -89,3 +89,95 @@
 
 **Q30.** Difference between backup and DR?
 <details><summary>Answer</summary>Backup protects data (corruption, deletion, ransomware) with point-in-time copies. DR keeps the whole service running elsewhere after a site/region loss.</details>
+
+## More backup and DR
+**Q31.** Back up Azure VMs every 4 hours and keep daily points for 30 days, monthly for 7 years.
+<details><summary>Answer</summary>Azure Backup **Enhanced policy** with daily, weekly, monthly and yearly retention.</details>
+
+**Q32.** Back up SQL Server running in an Azure VM with 15-minute log backups.
+<details><summary>Answer</summary>Azure Backup **SQL Server in Azure VM** workload backup.</details>
+
+**Q33.** Back up SAP HANA in Azure VMs.
+<details><summary>Answer</summary>Azure Backup **SAP HANA** (Backint certified).</details>
+
+**Q34.** Back up AKS persistent volumes and cluster state.
+<details><summary>Answer</summary>**Azure Backup for AKS** (Backup vault + backup extension).</details>
+
+**Q35.** Back up Azure Database for PostgreSQL beyond 35 days.
+<details><summary>Answer</summary>Azure Backup **long-term retention** in a Backup vault.</details>
+
+**Q36.** Monitor and govern backups across 50 subscriptions from one place.
+<details><summary>Answer</summary>**Business Continuity Center** / Backup center + Azure Policy to auto-enable backup.</details>
+
+**Q37.** Every new VM tagged `Backup=Gold` must be backed up automatically.
+<details><summary>Answer</summary>Azure Policy **"Configure backup on VMs with a given tag"** (DeployIfNotExists).</details>
+
+**Q38.** Recover a VM after ransomware encrypted its disks, with confidence the backup is clean.
+<details><summary>Answer</summary>Restore from an earlier recovery point; immutable vault + soft delete stop the attacker from deleting backups. Defender for Cloud helps find the infection point.</details>
+
+**Q39.** On-prem VMware to Azure DR, RPO under 1 minute.
+<details><summary>Answer</summary>**Azure Site Recovery** (VMware to Azure, continuous replication).</details>
+
+**Q40.** ASR: a 3-tier app must start DB first, then app, then web, with a DNS update script.
+<details><summary>Answer</summary>**Recovery plan** with groups in order + Automation runbook.</details>
+
+**Q41.** Keep the same private IP addresses after failover to Azure.
+<details><summary>Answer</summary>Use the same address space in the target VNet; ASR network mapping keeps IPs.</details>
+
+**Q42.** Disaster recovery for Azure Files.
+<details><summary>Answer</summary>**GZRS/GRS** with customer-initiated failover, or vaulted backup with cross-region restore.</details>
+
+**Q43.** DR for an App Service web app.
+<details><summary>Answer</summary>Deploy to a second region with IaC/CI-CD (active-active or active-passive) behind **Front Door/Traffic Manager**; geo-replicated data store.</details>
+
+**Q44.** DR for Key Vault.
+<details><summary>Answer</summary>Key Vault replicates to the paired region automatically (read-only during failover); for full control use a vault per region and replicate secrets via IaC/automation.</details>
+
+**Q45.** What do you test in a DR drill?
+<details><summary>Answer</summary>Failover runbooks, RTO/RPO achieved, DNS/connection changes, data consistency, failback, and that people know their roles.</details>
+
+**Q46.** Active-passive vs active-active?
+<details><summary>Answer</summary>Active-passive: standby region (warm/cold), cheaper, longer RTO. Active-active: both regions serve traffic, lowest RTO, needs multi-write data or conflict handling, higher cost.</details>
+
+**Q47.** Hot, warm and cold standby?
+<details><summary>Answer</summary>Hot: fully running duplicate. Warm: scaled-down running copy that scales up on failover. Cold: infrastructure defined in IaC, deployed only at failover (cheapest, slowest).</details>
+
+## More high availability
+**Q48.** Two VMs in one availability set. SLA?
+<details><summary>Answer</summary>**99.95%.**</details>
+
+**Q49.** Two VMs across two availability zones. SLA?
+<details><summary>Answer</summary>**99.99%.**</details>
+
+**Q50.** Single VM with Premium SSD or Ultra disks. SLA?
+<details><summary>Answer</summary>**99.9%.**</details>
+
+**Q51.** Load balancer for zone-redundant VMs?
+<details><summary>Answer</summary>**Standard** Load Balancer with a zone-redundant frontend (Basic is retired).</details>
+
+**Q52.** Zone-redundant SQL Database in General Purpose. What changes?
+<details><summary>Answer</summary>Compute and storage replicas are spread across zones for a higher SLA (up to 99.995%) with no app change.</details>
+
+**Q53.** Read-only routing to a SQL secondary in the same region.
+<details><summary>Answer</summary>**Read scale-out** (Business Critical/Premium/Hyperscale) with `ApplicationIntent=ReadOnly`.</details>
+
+**Q54.** Cosmos DB: what happens with single-write region when the write region fails?
+<details><summary>Answer</summary>With **service-managed failover** enabled, another region is promoted to write region automatically.</details>
+
+**Q55.** Make Redis cache survive a zone failure.
+<details><summary>Answer</summary>Premium/Enterprise tier with **zone redundancy**.</details>
+
+**Q56.** Service Bus survive a regional outage.
+<details><summary>Answer</summary>Premium tier **geo-disaster recovery** (metadata) or **geo-replication** (metadata + data); zone redundancy for zones.</details>
+
+**Q57.** Event Hubs survive a regional outage.
+<details><summary>Answer</summary>**Geo-disaster recovery** alias (metadata) or **geo-replication** (Premium/Dedicated).</details>
+
+**Q58.** Storage: avoid single region dependency for a global read-heavy app.
+<details><summary>Answer</summary>**RA-GZRS** + read from the secondary endpoint on failure (retry policy with secondary), or Front Door/CDN caching.</details>
+
+**Q59.** What is a single point of failure? Give Azure examples.
+<details><summary>Answer</summary>One component whose failure stops the system: one VM, one gateway, one ExpressRoute circuit, one region, one DNS record without failover.</details>
+
+**Q60.** How do health probes improve availability?
+<details><summary>Answer</summary>Load balancers/Front Door stop sending traffic to unhealthy instances automatically.</details>

@@ -1,6 +1,6 @@
 # Q&A Bank: AZ-305 and Azure Architect
 
-Read each question, answer it aloud, then open the answer. Questions are scenario-style, like the real exam.
+Read each question, answer it aloud, then open the answer. Questions are scenario-style, like the real exam. **414 questions + 9 case studies.**
 
 | File | Covers | Exam weight |
 |---|---|---|

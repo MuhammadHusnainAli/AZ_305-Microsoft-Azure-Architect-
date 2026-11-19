@@ -159,3 +159,205 @@
 
 **Q52.** Which CAF phase prepares landing zones before migration?
 <details><summary>Answer</summary>**Ready.**</details>
+
+## More compute
+**Q53.** VM family for an in-memory database needing lots of RAM.
+<details><summary>Answer</summary>**E-series** (or M-series for very large memory).</details>
+
+**Q54.** VM family for GPU training or visualisation.
+<details><summary>Answer</summary>**N-series** (NC/ND for compute/AI, NV for visualisation).</details>
+
+**Q55.** Low-cost VM for a dev server with low average CPU and occasional spikes.
+<details><summary>Answer</summary>**B-series** (burstable).</details>
+
+**Q56.** Keep a golden VM image versioned and replicated to 4 regions.
+<details><summary>Answer</summary>**Azure Compute Gallery** (image builder optional).</details>
+
+**Q57.** Patch 1,000 Windows and Linux VMs on a schedule, including Arc servers.
+<details><summary>Answer</summary>**Azure Update Manager** with maintenance configurations.</details>
+
+**Q58.** Open RDP only for 3 hours when an admin requests it.
+<details><summary>Answer</summary>Defender for Cloud **just-in-time VM access** (or Bastion).</details>
+
+**Q59.** VMSS: replace instances gradually when the image changes.
+<details><summary>Answer</summary>**Rolling upgrade policy** (or automatic OS image upgrades).</details>
+
+**Q60.** Run Windows containers and Linux containers in one AKS cluster.
+<details><summary>Answer</summary>Separate **Windows and Linux node pools**.</details>
+
+**Q61.** Reduce AKS cost for fault-tolerant batch pods.
+<details><summary>Answer</summary>**Spot node pool** with taints/tolerations, cluster autoscaler.</details>
+
+**Q62.** AKS pods need IPs directly from the VNet.
+<details><summary>Answer</summary>**Azure CNI** (or Azure CNI Overlay to save IPs).</details>
+
+**Q63.** Store and scan container images, replicate to 3 regions.
+<details><summary>Answer</summary>**Azure Container Registry Premium** (geo-replication) + Defender for Containers.</details>
+
+**Q64.** Run a container job every hour that finishes in 5 minutes.
+<details><summary>Answer</summary>**Container Apps jobs** (scheduled) or ACI with Logic Apps.</details>
+
+**Q65.** App Service: scale out vs scale up?
+<details><summary>Answer</summary>Scale out = more instances (autoscale). Scale up = bigger plan (more CPU/RAM, features like slots/VNet).</details>
+
+**Q66.** App Service needs to call a SQL MI in a private VNet.
+<details><summary>Answer</summary>**Regional VNet integration** (outbound).</details>
+
+**Q67.** App Service must only be reachable from the corporate network.
+<details><summary>Answer</summary>**Private endpoint** (inbound) and disable public access, or access restrictions.</details>
+
+**Q68.** Host a containerised web app with minimal ops and built-in slots.
+<details><summary>Answer</summary>**Web App for Containers** (App Service).</details>
+
+**Q69.** Run Spring Boot / Java microservices with managed platform.
+<details><summary>Answer</summary>**Azure Container Apps** (Azure Spring Apps is being retired) or App Service.</details>
+
+**Q70.** Function triggered by a timer every night.
+<details><summary>Answer</summary>Functions **timer trigger** (CRON expression).</details>
+
+**Q71.** Functions Consumption plan maximum execution time?
+<details><summary>Answer</summary>Default 5 minutes, max 10 minutes. For longer runs use Premium/Flex/Dedicated or Durable Functions.</details>
+
+**Q72.** Integrate SAP, Salesforce and on-prem SQL with B2B/EDI and VNet isolation.
+<details><summary>Answer</summary>**Logic Apps Standard** + integration account (or Azure Integration Services).</details>
+
+**Q73.** Run HPC with a scheduler like Slurm.
+<details><summary>Answer</summary>**Azure CycleCloud** (or Azure Batch for cloud-native batch).</details>
+
+## More application architecture
+**Q74.** Large messages (50 MB images) through a queue.
+<details><summary>Answer</summary>**Claim-check pattern**: store the payload in Blob, send a reference in the message (or Service Bus Premium large messages).</details>
+
+**Q75.** Messages must be processed at a scheduled time tomorrow.
+<details><summary>Answer</summary>Service Bus **scheduled messages**.</details>
+
+**Q76.** Several services must commit sending multiple messages atomically.
+<details><summary>Answer</summary>Service Bus **transactions**.</details>
+
+**Q77.** Event Hubs: two independent apps read the same stream at their own pace.
+<details><summary>Answer</summary>Separate **consumer groups**.</details>
+
+**Q78.** Event Hubs: archive every event to the lake without code.
+<details><summary>Answer</summary>**Event Hubs Capture** to Blob/ADLS (Avro/Parquet).</details>
+
+**Q79.** Event Grid vs Service Bus for "OrderPlaced"?
+<details><summary>Answer</summary>Event Grid for lightweight reactive notifications (push, fan-out). Service Bus when the business must reliably process every order with ordering/transactions.</details>
+
+**Q80.** IoT devices publish over MQTT with millions of connections.
+<details><summary>Answer</summary>**Event Grid MQTT broker** (namespaces) or **IoT Hub**.</details>
+
+**Q81.** Real-time push notifications to web browsers (chat, dashboards).
+<details><summary>Answer</summary>**Azure SignalR Service** / **Web PubSub**.</details>
+
+**Q82.** Store user session state for a web farm.
+<details><summary>Answer</summary>**Azure Cache for Redis** (session provider).</details>
+
+**Q83.** Redis data must survive restarts.
+<details><summary>Answer</summary>Premium tier **persistence** (RDB/AOF).</details>
+
+**Q84.** APIM: validate JWTs from Entra ID before reaching the backend.
+<details><summary>Answer</summary>**validate-jwt** (or validate-azure-ad-token) policy.</details>
+
+**Q85.** APIM: limit each partner to 1,000 calls per hour.
+<details><summary>Answer</summary>**rate-limit-by-key / quota-by-key** policy per subscription.</details>
+
+**Q86.** Cheapest APIM for a few serverless APIs with spiky traffic.
+<details><summary>Answer</summary>**Consumption** tier.</details>
+
+**Q87.** Govern and catalogue all APIs across the company (not a gateway).
+<details><summary>Answer</summary>**Azure API Center.**</details>
+
+**Q88.** Change app settings without restarting 50 instances.
+<details><summary>Answer</summary>**App Configuration** with dynamic refresh (sentinel key).</details>
+
+**Q89.** Prevent configuration drift in Azure resources.
+<details><summary>Answer</summary>IaC as the only change path (CI/CD), Azure Policy, **deployment stacks** with deny settings, what-if in pipelines.</details>
+
+**Q90.** Preview infrastructure changes before deploying a Bicep file.
+<details><summary>Answer</summary>**what-if** operation.</details>
+
+**Q91.** Approval gate before production deployment.
+<details><summary>Answer</summary>Azure Pipelines **environments with approvals/checks** or GitHub **environment protection rules**.</details>
+
+## More networking
+**Q92.** How many VNets can a single VNet peer with directly, and is peering transitive?
+<details><summary>Answer</summary>Up to 500 peerings by default (higher with AVNM); peering is **not transitive**.</details>
+
+**Q93.** Spokes must use the hub's VPN gateway to reach on-prem.
+<details><summary>Answer</summary>Peering with **Allow gateway transit** (hub) and **Use remote gateways** (spokes).</details>
+
+**Q94.** Force all internet-bound traffic from spokes through Azure Firewall.
+<details><summary>Answer</summary>**UDR** 0.0.0.0/0 → firewall private IP on each spoke subnet.</details>
+
+**Q95.** Force internet traffic back on-prem for inspection.
+<details><summary>Answer</summary>**Forced tunnelling** (default route advertised via BGP/VPN).</details>
+
+**Q96.** Point-to-site VPN users authenticate with Entra ID and MFA.
+<details><summary>Answer</summary>P2S with **OpenVPN** protocol + **Microsoft Entra ID authentication**.</details>
+
+**Q97.** VPN gateway must survive a zone failure.
+<details><summary>Answer</summary>**Zone-redundant SKU (VpnGwXAZ)**, active-active.</details>
+
+**Q98.** ExpressRoute: access Microsoft 365 and Azure public services privately.
+<details><summary>Answer</summary>**Microsoft peering** (with route filters).</details>
+
+**Q99.** Connect two on-prem sites through Microsoft's backbone using existing ExpressRoute circuits.
+<details><summary>Answer</summary>**ExpressRoute Global Reach.**</details>
+
+**Q100.** Private DNS for VMs in multiple VNets with auto-registration.
+<details><summary>Answer</summary>**Azure Private DNS zone** linked to VNets with auto-registration.</details>
+
+**Q101.** Expose your own SaaS service privately to customers' VNets.
+<details><summary>Answer</summary>**Private Link service** behind a Standard Load Balancer.</details>
+
+**Q102.** Restrict a storage account to one subnet without private IPs, at no cost.
+<details><summary>Answer</summary>**Service endpoint** + storage firewall VNet rule (plus service endpoint policy to prevent exfiltration).</details>
+
+**Q103.** Application Gateway must terminate TLS and re-encrypt to backend.
+<details><summary>Answer</summary>**End-to-end TLS** on Application Gateway.</details>
+
+**Q104.** Many websites with different hostnames on one Application Gateway.
+<details><summary>Answer</summary>**Multi-site listeners** (host-based routing).</details>
+
+**Q105.** Front Door must reach an App Service that has no public access.
+<details><summary>Answer</summary>Front Door **Premium** with **Private Link origin**.</details>
+
+**Q106.** Allow traffic to App Service only from Front Door.
+<details><summary>Answer</summary>Access restriction with service tag **AzureFrontDoor.Backend** + check the `X-Azure-FDID` header (or Private Link).</details>
+
+**Q107.** Block traffic from specific countries at the edge.
+<details><summary>Answer</summary>**WAF geo-filtering** custom rule on Front Door.</details>
+
+**Q108.** Central NSG/admin rules across 200 VNets.
+<details><summary>Answer</summary>**Azure Virtual Network Manager** security admin rules.</details>
+
+**Q109.** NVA high availability.
+<details><summary>Answer</summary>Two+ NVAs behind a **Standard internal Load Balancer** with **HA ports** (or Gateway Load Balancer).</details>
+
+**Q110.** Measure latency and packet loss between on-prem and Azure continuously.
+<details><summary>Answer</summary>Network Watcher **Connection Monitor.**</details>
+
+## More migration
+**Q111.** Rehost 500 Hyper-V VMs with minimal downtime.
+<details><summary>Answer</summary>**Azure Migrate: Server Migration** (replication + test migration + cutover).</details>
+
+**Q112.** What does an Azure Migrate assessment give you?
+<details><summary>Answer</summary>Readiness, right-sized Azure targets (performance-based or as-is), monthly cost estimates, and confidence rating.</details>
+
+**Q113.** Assessment confidence rating is low. Why?
+<details><summary>Answer</summary>Not enough performance data collected (collect for longer, e.g. a month) or missing counters.</details>
+
+**Q114.** Migrate Oracle to Azure.
+<details><summary>Answer</summary>Rehost on Azure VMs, **Oracle Database@Azure**, or convert to PostgreSQL (with migration tools).</details>
+
+**Q115.** Migrate MongoDB to Azure with minimal downtime.
+<details><summary>Answer</summary>**Azure DMS (online)** to **Cosmos DB for MongoDB** (vCore or RU).</details>
+
+**Q116.** Migrate ASP.NET apps from IIS servers at scale.
+<details><summary>Answer</summary>Azure Migrate **web app assessment and migration** to App Service (or AKS containers).</details>
+
+**Q117.** Copy 10 TB from AWS S3 to Azure Blob.
+<details><summary>Answer</summary>**AzCopy** (S3 to Blob directly) or **Data Factory**.</details>
+
+**Q118.** Order of a typical migration wave?
+<details><summary>Answer</summary>Landing zone ready → assess & group by dependency → pilot migration → test → cut over → decommission → optimise.</details>

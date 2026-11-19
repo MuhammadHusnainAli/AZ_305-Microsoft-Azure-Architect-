@@ -47,3 +47,60 @@
 
 **Q16.** What soft skills matter most?
 <details><summary>Answer</summary>Translating business needs to technical options, explaining trade-offs simply, influencing without authority, writing clearly, and continuous learning (Azure updates, Architecture Center).</details>
+
+**Q17.** Walk me through a request from a browser to a database in a secure Azure web app.
+<details><summary>Answer</summary>DNS → Front Door (TLS, WAF, caching) → Private Link/App Gateway → App Service/AKS (managed identity) → Key Vault for config secrets → Azure SQL via private endpoint with Entra auth → telemetry to Application Insights/Log Analytics.</details>
+
+**Q18.** How do you decide between AKS and Container Apps?
+<details><summary>Answer</summary>Container Apps when the team wants serverless containers with little platform ops. AKS when you need full Kubernetes API control, custom operators, service mesh, specific networking or node-level tuning, and have the skills to run it.</details>
+
+**Q19.** How do you design for idempotency and why?
+<details><summary>Answer</summary>Messages and retries can be delivered more than once. Use unique operation IDs, upserts, dedup tables or Service Bus duplicate detection so repeat processing gives the same result.</details>
+
+**Q20.** Eventual consistency — how do you explain it to the business?
+<details><summary>Answer</summary>Data reaches every copy shortly after a write, not instantly. In exchange the system is faster and more available. Pick where it is acceptable (e.g. product reviews) and where it is not (e.g. account balance).</details>
+
+**Q21.** How do you handle a distributed transaction across microservices?
+<details><summary>Answer</summary>Avoid 2PC; use the **Saga** pattern (choreography with events or orchestration with Durable Functions) with **compensating transactions**, plus the **outbox** pattern for reliable publishing.</details>
+
+**Q22.** What are deployment stamps and when would you use them?
+<details><summary>Answer</summary>Independent copies of the whole workload (scale units). Use to scale beyond service limits, isolate tenants, or deploy close to users per region.</details>
+
+**Q23.** How do you approach a performance problem in production?
+<details><summary>Answer</summary>Measure first (App Insights, metrics), find the bottleneck (DB queries, dependencies, CPU, network), fix the biggest one, load test, and set alerts/SLOs to prevent regression.</details>
+
+**Q24.** How do you prevent a single bad deployment from taking down every region?
+<details><summary>Answer</summary>Progressive rollout: one region/ring at a time, health gates, automatic rollback, feature flags, and keep regions independent (no shared single point).</details>
+
+**Q25.** What would you put in a landing zone for a new application team?
+<details><summary>Answer</summary>Subscription under the right MG, spoke VNet peered to hub, policies (regions, tags, diagnostics), RBAC groups with PIM, budget alerts, Log Analytics connection, Defender plans, CI/CD identity.</details>
+
+**Q26.** How do you secure the software supply chain?
+<details><summary>Answer</summary>Protected branches and reviews, dependency/secret scanning, signed artifacts and images, private registries, least-privilege pipeline identities (OIDC), Defender for DevOps/containers.</details>
+
+**Q27.** How do you decide between building and buying (SaaS)?
+<details><summary>Answer</summary>Buy when the capability is not a differentiator and a SaaS meets requirements; build when it is core to competitive advantage or no product fits. Consider total cost, lock-in, compliance.</details>
+
+**Q28.** What is technical debt in architecture and how do you manage it?
+<details><summary>Answer</summary>Shortcuts that make future change harder. Make it visible (ADRs, backlog), prioritise by risk/cost, and pay it down continuously.</details>
+
+**Q29.** How do you get buy-in for a costly reliability improvement?
+<details><summary>Answer</summary>Quantify cost of downtime (revenue/hour, SLA penalties, reputation) vs. cost of the solution; show options with RTO/RPO and price; let the business choose.</details>
+
+**Q30.** How do you keep up to date with Azure?
+<details><summary>Answer</summary>Azure Updates, Azure Architecture Center, Well-Architected guides, Microsoft Learn, Azure Friday, hands-on labs and side projects.</details>
+
+**Q31.** Explain the difference between a load balancer, an API gateway and a service mesh.
+<details><summary>Answer</summary>Load balancer distributes traffic (L4/L7). API gateway manages north-south APIs (auth, quotas, transformation). Service mesh manages east-west service-to-service traffic (mTLS, retries, observability) inside a cluster.</details>
+
+**Q32.** How do you design an application for zero-downtime database schema changes?
+<details><summary>Answer</summary>Expand-and-contract: add new columns/tables first (backward compatible), deploy code that writes both, migrate data, switch reads, then remove old structures later.</details>
+
+**Q33.** What questions do you ask before choosing a database?
+<details><summary>Answer</summary>Data model (relational, document, graph, time-series), consistency needs, read/write ratio, scale, latency, global distribution, query patterns, team skills, compliance, cost.</details>
+
+**Q34.** How do you design logging so it is useful during an incident?
+<details><summary>Answer</summary>Structured logs with correlation IDs, consistent severity, central workspace, dashboards of golden signals (latency, traffic, errors, saturation), actionable alerts linked to runbooks.</details>
+
+**Q35.** What makes a good architecture decision record (ADR)?
+<details><summary>Answer</summary>Context, decision, options considered, trade-offs, consequences, status and date — short and kept with the code.</details>
