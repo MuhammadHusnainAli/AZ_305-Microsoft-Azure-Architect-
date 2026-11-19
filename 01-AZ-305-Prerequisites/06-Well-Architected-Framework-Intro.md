@@ -26,6 +26,21 @@ mindmap
 | **Operational Excellence** | Deploy and run reliably and safely | IaC, CI/CD, monitoring, safe deployment practices |
 | **Performance Efficiency** | Adapt efficiently to changes in demand | Scale out, caching, CDN, partitioning, load testing |
 
+![An illustration that shows the pillars of the Azure Well-Architected Framework.](../assets/01-AZ-305-Prerequisites/06-Well-Architected-Framework-Intro/2-pillars.png)
+*An illustration that shows the pillars of the Azure Well-Architected Framework.*
+
+![An illustration that shows two virtual machines in a virtual network. One of the machines is shown as failed, while the other is working to service customer requests.](../assets/01-AZ-305-Prerequisites/06-Well-Architected-Framework-Intro/2-system-failure.png)
+*An illustration that shows two virtual machines in a virtual network. One of the machines is shown as failed, while the other is working to service customer requests.*
+
+![An illustration that shows the types of security threats and attacks that might affect your data in the cloud.](../assets/01-AZ-305-Prerequisites/06-Well-Architected-Framework-Intro/2-security.png)
+*An illustration that shows the types of security threats and attacks that might affect your data in the cloud.*
+
+![An illustration that shows increasing quality, speed, and efficiency while maintaining decreasing costs.](../assets/01-AZ-305-Prerequisites/06-Well-Architected-Framework-Intro/2-efficiency.png)
+*An illustration that shows increasing quality, speed, and efficiency while maintaining decreasing costs.*
+
+![An illustration that shows how resources in the cloud scale dynamically based on demand, resulting in highly efficient usage. When resources are implemented at a fixed level, it results in inefficient usage during low demand and shortage during high demand.](../assets/01-AZ-305-Prerequisites/06-Well-Architected-Framework-Intro/2-performance-demand.png)
+*An illustration that shows how resources in the cloud scale dynamically based on demand, resulting in highly efficient usage. When resources are implemented at a fixed level, it results in inefficient usage during low demand and shortage during high demand.*
+
 ## Tools
 - **Azure Well-Architected Review**: an assessment questionnaire that scores your workload.
 - **Azure Advisor**: personalised recommendations grouped by the same five pillars.

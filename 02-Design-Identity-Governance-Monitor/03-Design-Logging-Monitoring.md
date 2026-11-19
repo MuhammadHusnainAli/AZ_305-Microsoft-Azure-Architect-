@@ -34,6 +34,9 @@ flowchart LR
 | Subscription | **Activity log** (who did what, control plane) | Automatic; kept 90 days, route with diagnostic setting |
 | Tenant | Entra ID sign-in and audit logs | Diagnostic setting in Entra ID |
 
+![Diagram that shows sources of monitoring data for Azure Monitor.](../assets/02-Design-Identity-Governance-Monitor/03-Design-Logging-Monitoring/2-azure-monitor-source.png)
+*Diagram that shows sources of monitoring data for Azure Monitor.*
+
 ## Log routing (diagnostic settings destinations)
 | Destination | Use |
 |---|---|
@@ -49,6 +52,9 @@ flowchart LR
 - Retention: interactive retention up to 2 years, total (long-term/archive) up to 12 years. Table plans: **Analytics**, **Basic** (cheap, limited queries), **Auxiliary**.
 - Cost: **commitment tiers** for steady high ingestion.
 
+![Diagram that shows how to design an Azure Monitor Logs deployment.](../assets/02-Design-Identity-Governance-Monitor/03-Design-Logging-Monitoring/3-workspace-design-expanded.png)
+*Diagram that shows how to design an Azure Monitor Logs deployment.*
+
 ## Visualise and analyse
 | Tool | Use |
 |---|---|
@@ -58,6 +64,9 @@ flowchart LR
 | **Azure Managed Grafana** | Grafana dashboards over Azure Monitor and other sources |
 | **Power BI** | Business reporting over log data |
 | **Azure Data Explorer** | Very fast analytics on huge volumes of logs/telemetry/time series using KQL; long-term analytics beyond Log Analytics |
+
+![Diagram of an end-to-end monitoring solution integrated with Azure Monitor for ingesting streamed and batched logs from diverse sources.](../assets/02-Design-Identity-Governance-Monitor/03-Design-Logging-Monitoring/5-azure-data-explorer.png)
+*Diagram of an end-to-end monitoring solution integrated with Azure Monitor for ingesting streamed and batched logs from diverse sources.*
 
 ## Alerts and response
 - Alert types: **metric**, **log search**, **activity log**, **smart detection** (App Insights), **service health / resource health**.

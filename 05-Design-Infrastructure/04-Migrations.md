@@ -11,11 +11,26 @@ flowchart LR
 ```
 CAF phases: Strategy → Plan → Ready (landing zone) → **Migrate** (Assess → Deploy → Release). Strategies: retire, rehost, replatform, refactor, rearchitect, rebuild, replace (see [CAF module](../01-AZ-305-Prerequisites/05-Cloud-Adoption-Framework.md)).
 
+![Diagram that shows Cloud Adoption Framework methodologies, including strategy, plan, ready, adopt, govern, and manage.](../assets/05-Design-Infrastructure/04-Migrations/2-cloud-adoption-framework.png)
+*Diagram that shows Cloud Adoption Framework methodologies, including strategy, plan, ready, adopt, govern, and manage.*
+
+![Diagram of migration adoption efforts for workloads, including assess, deploy, and release.](../assets/05-Design-Infrastructure/04-Migrations/2-migrate-methodology.png)
+*Diagram of migration adoption efforts for workloads, including assess, deploy, and release.*
+
 ## Assess on-premises workloads
 - **Azure Migrate**: central hub. **Discovery and assessment** with the **Azure Migrate appliance** (agentless for VMware, Hyper-V, physical). Produces readiness, right-sized Azure targets, cost estimates.
 - **Dependency analysis** (agentless or agent-based) shows which servers talk to each other, so you migrate groups together.
 - Assessments for: Azure VMs, Azure SQL, Azure App Service, AKS, Azure VMware Solution (AVS), and **business case**.
 - **Azure Migrate business case** and the **TCO calculator** for cost justification.
+
+![Screenshot that shows a cost analysis example with estimated costs in the Azure portal.](../assets/05-Design-Infrastructure/04-Migrations/3-cost-analysis.png)
+*Screenshot that shows a cost analysis example with estimated costs in the Azure portal.*
+
+![Flowchart that shows how to do discovery and assessment with the Azure Migrate Discovery and Assessment tool.](../assets/05-Design-Infrastructure/04-Migrations/4-migrate-discovery.png)
+*Flowchart that shows how to do discovery and assessment with the Azure Migrate Discovery and Assessment tool.*
+
+![Screenshot that shows Azure Migrate: Discovery and assessment tools.](../assets/05-Design-Infrastructure/04-Migrations/5-discover-assess.png)
+*Screenshot that shows Azure Migrate: Discovery and assessment tools.*
 
 ## Migrate servers and apps
 | Tool | Use |
@@ -45,6 +60,9 @@ Choose target: compatibility needs → **SQL MI**; full control → **SQL on VM*
 | **Azure Storage Mover** | Managed migration of NFS/SMB shares to Azure Files / Blob, orchestrated |
 | **Azure Data Factory** | Large, scheduled, repeated copies from many sources |
 | **Azure Data Box Gateway** | Virtual appliance for continuous ingestion via a network share |
+
+![Illustration that shows how the Storage Mover architecture.](../assets/05-Design-Infrastructure/04-Migrations/7-storage-mover.png)
+*Illustration that shows how the Storage Mover architecture.*
 
 ## Migrate offline data
 | Device | Capacity (usable, approx.) |

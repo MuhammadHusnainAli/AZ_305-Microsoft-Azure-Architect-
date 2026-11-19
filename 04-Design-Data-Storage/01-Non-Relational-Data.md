@@ -21,10 +21,16 @@ flowchart TD
   Q -->|Simple key-attribute, cheap| TB[Table Storage]
 ```
 
+![Flowchart showing nonrelational storage choices.](../assets/04-Design-Data-Storage/01-Non-Relational-Data/2-storage-decision-tree.png)
+*Flowchart showing nonrelational storage choices.*
+
 ## Storage account design
 - Choose by: **workload type** (performance tier), **redundancy**, **region**, **billing/isolation**, **security**.
 - Create separate accounts when you need different redundancy, regions, performance tiers, or a scalability-target limit is reached.
 - **Standard GPv2** for most; **Premium** for low latency (block blob, file shares, page blob).
+
+![Diagram showing storage account considerations like location, compliance, cost, replication, and administration.](../assets/04-Design-Data-Storage/01-Non-Relational-Data/3-storage-considerations.png)
+*Diagram showing storage account considerations like location, compliance, cost, replication, and administration.*
 
 ## Redundancy recap
 | Need | Choose |
@@ -34,11 +40,20 @@ flowchart TD
 | Survive a region failure | GRS / **GZRS** (best durability + availability) |
 | Read from the secondary during an outage | **RA-GRS / RA-GZRS** |
 
+![Diagram of locally redundant storage with three copies in the data center, and zone-redundant storage with three copies in different data centers.](../assets/04-Design-Data-Storage/01-Non-Relational-Data/4-data-redundancy.png)
+*Diagram of locally redundant storage with three copies in the data center, and zone-redundant storage with three copies in different data centers.*
+
+![Diagram that shows locally redundant storage and zone-redundant storage replicated to the secondary region.](../assets/04-Design-Data-Storage/01-Non-Relational-Data/4-geo-redundant-storage.png)
+*Diagram that shows locally redundant storage and zone-redundant storage replicated to the secondary region.*
+
 ## Blob storage
 - Types: **block blob** (files, most common), **append blob** (logs), **page blob** (random read/write, VHDs).
 - Access tiers: Hot / Cool (30 d) / Cold (90 d) / Archive (180 d, hours to rehydrate, Standard or High priority). **Lifecycle management** rules move/delete by age or last access.
 - Immutable storage (WORM), versioning, soft delete, object replication (see BC module).
 - **Data Lake Storage Gen2** = blob + **hierarchical namespace** (directories, POSIX ACLs, atomic renames) for big-data analytics.
+
+![Diagram that shows policies applied at the container level.](../assets/04-Design-Data-Storage/01-Non-Relational-Data/5-container-policies.png)
+*Diagram that shows policies applied at the container level.*
 
 ## Azure Files and alternatives
 | Option | Use |
@@ -65,6 +80,9 @@ flowchart TD
 - Network: **storage firewall**, **service endpoints**, **private endpoints** (private IP, best). Disable public network access.
 - Require **secure transfer (HTTPS)**, minimum TLS 1.2. **Defender for Storage** detects malware and anomalies.
 - Encryption at rest always on; **CMK** in Key Vault; **infrastructure (double) encryption**.
+
+![Diagram of a private endpoint that uses a private link to Azure storage accounts.](../assets/04-Design-Data-Storage/01-Non-Relational-Data/8-private-links.png)
+*Diagram of a private endpoint that uses a private link to Azure storage accounts.*
 
 ## Azure Cosmos DB
 - Globally distributed, multi-model, single-digit-ms latency, SLAs for throughput, latency, consistency and availability.

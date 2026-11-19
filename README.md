@@ -60,6 +60,12 @@ flowchart LR
 
 ### Final revision
 - [ ] [EXAM-CHEATSHEET.md](EXAM-CHEATSHEET.md): "if the requirement says X, choose Y" in one page
+- [ ] [qa/](qa/README.md): ~190 scenario questions, 4 exam-style case studies and architect interview questions
+
+## Official images
+Official Microsoft Learn diagrams appear inside each module, right under the topic they explain. The images are stored in [`assets/`](assets), in the same folder structure as the modules. [`assets/manifest.tsv`](assets/manifest.tsv) lists each image with its module, unit and caption.
+
+> Images © Microsoft, from [Microsoft Learn](https://learn.microsoft.com/training/). Kept here for personal exam study only.
 
 ## How to study each module
 1. Read the diagram first, then the tables.

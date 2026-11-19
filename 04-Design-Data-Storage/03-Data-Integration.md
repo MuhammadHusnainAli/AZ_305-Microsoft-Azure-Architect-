@@ -37,9 +37,18 @@ flowchart LR
 | **Self-hosted IR** | Access **on-premises or private network** data sources |
 | **Azure-SSIS IR** | **Lift-and-shift existing SSIS packages** |
 
+![Diagram that shows the Azure Data Factory architecture.](../assets/04-Design-Data-Storage/03-Data-Integration/2-azure-data-factory-overview.png)
+*Diagram that shows the Azure Data Factory architecture.*
+
+![Diagram that shows a pipeline, activities, data sets, and linked services in Azure Data Factory.](../assets/04-Design-Data-Storage/03-Data-Integration/2-data-factory-components.png)
+*Diagram that shows a pipeline, activities, data sets, and linked services in Azure Data Factory.*
+
 ## Azure Data Lake Storage Gen2
 - Blob storage + hierarchical namespace. The foundation for big-data analytics. Stores raw → cleansed → curated zones (**medallion**: bronze/silver/gold).
 - Security: RBAC + POSIX **ACLs**, private endpoints.
+
+![Diagram that shows how unplanned data and streaming data are either bulk ingested or unplanned ingested in Azure Data Lake Storage.](../assets/04-Design-Data-Storage/03-Data-Integration/3-data-lake.png)
+*Diagram that shows how unplanned data and streaming data are either bulk ingested or unplanned ingested in Azure Data Lake Storage.*
 
 ## Azure Databricks
 - Apache **Spark**-based analytics platform. Collaborative notebooks (Python, Scala, SQL, R), **Delta Lake**, **ML/AI**, Unity Catalog for governance.
@@ -58,6 +67,12 @@ flowchart LR
 | Real-time stream processing with SQL | **Stream Analytics** |
 | Analytics on Cosmos DB without hurting OLTP | **Synapse Link** |
 
+![Diagram that shows the Azure Synapse Analytics architecture.](../assets/04-Design-Data-Storage/03-Data-Integration/5-azure-synapse.png)
+*Diagram that shows the Azure Synapse Analytics architecture.*
+
+![Diagram that shows an overview of Azure Synapse Analytics capabilities.](../assets/04-Design-Data-Storage/03-Data-Integration/5-azure-synapse-analytics-overview.png)
+*Diagram that shows an overview of Azure Synapse Analytics capabilities.*
+
 ## Hot, warm and cold data paths (Lambda-style)
 | Path | Latency | Example |
 |---|---|---|
@@ -69,6 +84,9 @@ flowchart LR
 - Real-time analytics with a **SQL-like query language**. Inputs: **Event Hubs, IoT Hub, Blob/ADLS** (reference data). Outputs: Power BI, SQL, Cosmos DB, Data Lake, Functions, Service Bus.
 - **Windowing functions**: tumbling (fixed, non-overlapping), hopping (overlapping), sliding, session, snapshot.
 - Fully managed, measured in streaming units; can run on IoT Edge.
+
+![Diagram that shows the Stream Analytics pipeline, and how data is ingested, analyzed, and sent for presentation or action.](../assets/04-Design-Data-Storage/03-Data-Integration/7-stream-analytics-end-to-end-pipeline.png)
+*Diagram that shows the Stream Analytics pipeline, and how data is ingested, analyzed, and sent for presentation or action.*
 
 ## Exam tips
 - Copy on-prem SQL Server data to Azure every night → **ADF + self-hosted IR**.

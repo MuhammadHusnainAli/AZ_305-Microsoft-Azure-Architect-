@@ -31,6 +31,12 @@ flowchart LR
 | **Manage** | Operations baseline, monitoring, BCDR | Azure Monitor, Azure Backup, Site Recovery |
 | **Secure** | Security across the lifecycle, Zero Trust | Defender for Cloud, Microsoft Sentinel, Entra ID |
 
+![Diagram that shows a strategy cycle: assess; define motivations, mission, and objectives; define team; prepare organization; inform strategy.](../assets/01-AZ-305-Prerequisites/05-Cloud-Adoption-Framework/2-strategy-overview.svg)
+*Diagram that shows a strategy cycle: assess; define motivations, mission, and objectives; define team; prepare organization; inform strategy.*
+
+![Diagram that shows a governance team establishing a cycle of risk assessment, policy documentation, enforcement, and monitoring.](../assets/01-AZ-305-Prerequisites/05-Cloud-Adoption-Framework/8-govern.svg)
+*Diagram that shows a governance team establishing a cycle of risk assessment, policy documentation, enforcement, and monitoring.*
+
 ## Migration strategies (the "Rs")
 | Strategy | Meaning |
 |---|---|

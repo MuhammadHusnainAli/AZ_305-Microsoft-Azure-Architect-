@@ -22,6 +22,12 @@ flowchart LR
 | **Azure Functions** | Premium/Flex Consumption with zone redundancy |
 | Global routing | **Azure Front Door** (HTTP, anycast, WAF, fast failover) or **Traffic Manager** (DNS, any protocol) |
 
+![Fault Domains and Update Domains](../assets/03-Design-Business-Continuity/02-Design-High-Availability/4-module-77-high-availability-final-01.png)
+*Fault Domains and Update Domains*
+
+![Configuring Azure Site Recovery](../assets/03-Design-Business-Continuity/02-Design-High-Availability/6-module-77-high-availability-final-07.png)
+*Configuring Azure Site Recovery*
+
 ## Non-relational data HA
 | Service | HA options |
 |---|---|
@@ -45,6 +51,21 @@ flowchart LR
   P -- async geo-replication --> S[(Secondary DB<br/>Region B)]
   APP -.after failover, same listener.-> S
 ```
+
+![An Availability Group in a single region](../assets/03-Design-Business-Continuity/02-Design-High-Availability/6-module-77-high-availability-final-02.png)
+*An Availability Group in a single region*
+
+![A FCI deployment using Storage Spaces Direct](../assets/03-Design-Business-Continuity/02-Design-High-Availability/6-module-77-high-availability-final-03.png)
+*A FCI deployment using Storage Spaces Direct*
+
+![A single AG configured over two locations](../assets/03-Design-Business-Continuity/02-Design-High-Availability/6-module-77-high-availability-final-04.png)
+*A single AG configured over two locations*
+
+![An example distributed AG configuration](../assets/03-Design-Business-Continuity/02-Design-High-Availability/6-module-77-high-availability-final-05.png)
+*An example distributed AG configuration*
+
+![Configuration showing backup, copy, & restore jobs](../assets/03-Design-Business-Continuity/02-Design-High-Availability/6-module-77-high-availability-final-06.png)
+*Configuration showing backup, copy, & restore jobs*
 
 ## Exam tips
 - Survive a datacenter failure with the least cost → **availability zones** (not multi-region).

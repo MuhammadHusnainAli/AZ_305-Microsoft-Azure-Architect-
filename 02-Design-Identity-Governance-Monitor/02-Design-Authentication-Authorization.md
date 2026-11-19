@@ -3,6 +3,9 @@ Units: Introduction · Identity and access management · Microsoft Entra ID · B
 
 Exam skills: authentication solution · identity management · authorise access to Azure resources · authorise access to on-premises resources · manage secrets, certificates and keys.
 
+![Diagram of the four basic guidelines for a strong IAM solution.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/2-identity-access.png)
+*Diagram of the four basic guidelines for a strong IAM solution.*
+
 ## Hybrid identity: choose the authentication method
 ```mermaid
 flowchart TD
@@ -19,6 +22,9 @@ flowchart TD
 | **Federation (AD FS)** | Most complex; needed for smartcard/certificate sign-in or 3rd-party federation |
 - Sync tools: **Microsoft Entra Connect Sync** (on-prem server) or **Microsoft Entra Cloud Sync** (lightweight agents, multi-forest friendly).
 
+![Diagram that shows how Microsoft Entra Connect syncs Active Directory Domain Services and Microsoft Entra ID.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/3-on-premises-identities.png)
+*Diagram that shows how Microsoft Entra Connect syncs Active Directory Domain Services and Microsoft Entra ID.*
+
 ## Microsoft Entra ID editions
 | Edition | Adds |
 |---|---|
@@ -30,12 +36,30 @@ flowchart TD
 - **B2B**: partner employees use their own identity as **guests** in your tenant. Govern with access reviews and entitlement management.
 - **Azure AD B2C / Entra External ID**: **customer** identities for your public apps; social logins (Google, Facebook), custom branding, user flows/custom policies.
 
+![Diagram that shows how business-to-business users are invited to Microsoft Entra ID.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/4-external-identities.png)
+*Diagram that shows how business-to-business users are invited to Microsoft Entra ID.*
+
+![Diagram that shows how guest users are invited to Microsoft Entra ID.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/4-business-to-business-guest-users.png)
+*Diagram that shows how guest users are invited to Microsoft Entra ID.*
+
 ## Conditional Access and Identity Protection
 - Conditional Access = signals → decision → enforcement. Common policies: require MFA for admins, block legacy authentication, require compliant/hybrid-joined devices, block risky countries.
 - **Identity Protection** (P2): **user risk** (leaked credentials) and **sign-in risk** (unfamiliar location, anonymous IP). Use it in risk-based Conditional Access (for example high user risk → force password change).
 
+![Diagram that shows how the Conditional Access tool evaluates conditions and determines access.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/6-conditions-actions.png)
+*Diagram that shows how the Conditional Access tool evaluates conditions and determines access.*
+
+![Diagram that shows automated remediation.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/7-user-risk-level-evaluation.png)
+*Diagram that shows automated remediation.*
+
+![Diagram that shows risky users, risky sign-ins, and risk detections.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/7-risk-detections.png)
+*Diagram that shows risky users, risky sign-ins, and risk detections.*
+
 ## Access reviews
 - Periodic reviews of group membership, app access, and role assignments. Reviewers can be owners, managers, or self. Auto-apply results to remove access.
+
+![Diagram that shows identity management for an employee from their hire date, to access for specific roles, to their access removed when they leave the company.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/8-employee-access-lifecycle.png)
+*Diagram that shows identity management for an employee from their hire date, to access for specific roles, to their access removed when they leave the company.*
 
 ## Authorise apps: service principals and managed identities
 ```mermaid
@@ -50,6 +74,12 @@ flowchart LR
 | **User-assigned managed identity** | Standalone resource; **share across many resources**; survives resource deletion |
 | **Workload identity federation** | GitHub Actions / Kubernetes / other clouds get tokens **without secrets** |
 - Exam rule: "Azure resource must access another Azure service **without storing credentials**" → **managed identity**.
+
+![Diagram that shows how business-to-customer users are registered in the Microsoft Entra tenant.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/5-application-registration.png)
+*Diagram that shows how business-to-customer users are registered in the Microsoft Entra tenant.*
+
+![Diagram that shows how application objects and service principals are used in Azure subscriptions.](../assets/02-Design-Identity-Governance-Monitor/02-Design-Authentication-Authorization/9-application-service-principals.png)
+*Diagram that shows how application objects and service principals are used in Azure subscriptions.*
 
 ## Authorise access to on-premises resources
 - **Microsoft Entra application proxy**: publish on-prem web apps to remote users with Entra pre-authentication, no inbound firewall ports (outbound connector). Supports Kerberos constrained delegation (KCD) for Integrated Windows Authentication apps.

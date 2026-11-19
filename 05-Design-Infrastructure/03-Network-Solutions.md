@@ -21,6 +21,24 @@ flowchart TB
 - **VNet peering**: low-latency, private Microsoft backbone, **non-transitive**. Global peering works across regions.
 - Plan non-overlapping IP address spaces; use subnets for segmentation. **Azure Virtual Network Manager** manages connectivity/security rules at scale.
 
+![Diagram of an example hub and spoke architecture.](../assets/05-Design-Infrastructure/03-Network-Solutions/2-network-hub-spokes-cluster.png)
+*Diagram of an example hub and spoke architecture.*
+
+![Diagram with two virtual networking in a single region.](../assets/05-Design-Infrastructure/03-Network-Solutions/3-single-network.png)
+*Diagram with two virtual networking in a single region.*
+
+![Diagram with two virtual networking in different regions.](../assets/05-Design-Infrastructure/03-Network-Solutions/3-multiple-network.png)
+*Diagram with two virtual networking in different regions.*
+
+![Diagram of a hub spoke network.](../assets/05-Design-Infrastructure/03-Network-Solutions/3-hub-spoke-design.png)
+*Diagram of a hub spoke network.*
+
+![Diagram of an example system route architecture.](../assets/05-Design-Infrastructure/03-Network-Solutions/4-system-routes.png)
+*Diagram of an example system route architecture.*
+
+![Diagram of an example user defined architecture.](../assets/05-Design-Infrastructure/03-Network-Solutions/4-user-defined-route.png)
+*Diagram of an example user defined architecture.*
+
 ## Connect to on-premises
 | Option | Facts |
 |---|---|
@@ -62,6 +80,9 @@ flowchart TD
 - Traffic Manager routing methods: priority (failover), weighted, performance (closest), geographic (data sovereignty), multivalue, subnet.
 - Load Balancer: Standard SKU (zones, SLA); Gateway LB for NVA chaining.
 
+![Diagram showing an architecture with the different load balancers.](../assets/05-Design-Infrastructure/03-Network-Solutions/7-front-door-application-gateway.png)
+*Diagram showing an architecture with the different load balancers.*
+
 ## Application protection and network security
 | Service | Protects |
 |---|---|
@@ -72,6 +93,9 @@ flowchart TD
 | **Azure Bastion** | Secure RDP/SSH without public IPs |
 | **NVA** | Third-party firewalls from Marketplace |
 | **UDR / route tables** | Force tunnelling traffic through firewall/NVA |
+
+![Diagram showing the network elements at different protection levels.](../assets/05-Design-Infrastructure/03-Network-Solutions/8-network-defense-in-depth-private.png)
+*Diagram showing the network elements at different protection levels.*
 
 ## Optimise performance
 - **Accelerated networking** (SR-IOV) on VMs, **proximity placement groups** (lowest latency between VMs), ExpressRoute FastPath, **CDN/Front Door** caching, choose regions near users, **Network Watcher** for diagnosis.
